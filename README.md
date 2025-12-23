@@ -24,8 +24,8 @@ for unpaired multimodal data**.
 
 
 
-_________________________________________________Datasets_________________________________________
------- ECG Dataset----------
+## Dataset
+### ECG Dataset
 1:PTB-XL ECG dataset
 2:Used for extracting physiological cardiac features
 
@@ -33,7 +33,7 @@ _________________________________________________Datasets_______________________
 - Speech Dataset fromthe Author of M. Usman, Z. Ahmad and M. Wajid, "Dataset of Raw and Pre-processed Speech Signals, Mel Frequency Cepstral Coefficients of Speech and Heart Rate Measurements," 2019 5th International Conference on Signal Processing, Computing and Control (ISPCC)
 - Used for extracting MFCC and speech-related features
 
-⚠️ **Important**: The ECG and speech datasets are from **different individuals** and are not patient-aligned.
+**Important**: The ECG and speech datasets are from **different individuals** and are not patient-aligned.
 
 ---
 
@@ -115,6 +115,7 @@ This repository contains the implementation, data preprocessing pipeline, and an
 **Maira Hashmi**
 MS Data Science, FAST School of Management
 Supervisor: **Dr. Akhtar Jamil**
+Co-Supervisor: **Dr. Uzair**
 
 ---
 
