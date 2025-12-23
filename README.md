@@ -9,9 +9,79 @@
 
 ### **Short Description**
 
-Speech and ECG fusion using diffusion probabilistic models for non-invasive cardiac morbidity detection and analysis.
+Speech and ECG fusion using diffusion probabilistic models for non-invasive cardiac morbidity detection and analysis.# Multimodal ECG and Speech Feature Fusion
+
+## Project Overview
+This repository contains the implementation of my MS thesis work focused on multimodal analysis using ECG and speech data for cardiac anomaly detection.
+
+The core objective of this research is to study how **speech-based features** and **ECG-based physiological features** can be fused at the feature level even when the datasets belong to **different (unpaired) patients**.
 
 ---
+
+
+This work addresses that gap by proposing a **feature-level fusion framework
+for unpaired multimodal data**.
+
+
+
+_________________________________________________Datasets_________________________________________
+------ ECG Dataset----------
+1:PTB-XL ECG dataset
+2:Used for extracting physiological cardiac features
+
+### Speech Dataset
+- Speech Dataset fromthe Author of M. Usman, Z. Ahmad and M. Wajid, "Dataset of Raw and Pre-processed Speech Signals, Mel Frequency Cepstral Coefficients of Speech and Heart Rate Measurements," 2019 5th International Conference on Signal Processing, Computing and Control (ISPCC)
+- Used for extracting MFCC and speech-related features
+
+⚠️ **Important**: The ECG and speech datasets are from **different individuals** and are not patient-aligned.
+
+---
+
+## Feature Extraction
+### ECG Features
+- Heart Rate (HR)
+- RR intervals
+- R-peak statistics
+- Time-domain statistical features
+
+### Speech Features
+- MFCC coefficients
+- Mean and standard deviation of MFCCs
+- Energy-based speech descriptors
+
+---
+
+## Feature Normalization
+- StandardScaler is applied to normalize speech features
+- ECG features are normalized separately
+- This ensures equal contribution of both modalities during fusion
+
+---
+
+## Feature Fusion Technique
+- **Feature-Level (Early) Fusion**
+- Statistical aggregation (mean, std) is used
+- Fused feature vectors are created without patient-level pairing
+
+
+
+## Machine Learning Models
+- Classical machine learning classifiers are used for evaluation
+- Focus is on feasibility and methodological validation
+
+---
+
+## Why Diffusion Models Were Not Used
+Although diffusion models are powerful for cross-modal generation, they were
+not used in this thesis due to:
+- Lack of paired multimodal medical data
+- High computational cost
+- Thesis focus on fusion feasibility rather than generative modeling
+
+Diffusion models are identified as **future work**.
+
+---
+
 
 ### **README.md**
 
@@ -21,124 +91,22 @@ Speech and ECG fusion using diffusion probabilistic models for non-invasive card
 ## Overview
 This repository contains the implementation, data preprocessing pipeline, and analysis scripts for the thesis **"Speech-Driven Cardiac Morbidity Detection Using ECG Signals and Diffusion Models"** by **Maira Hashmi** (MS Data Science, FAST School of Management, Islamabad). The project explores the feasibility of mapping speech biomarkers to ECG signals for cardiac abnormality detection using multimodal AI frameworks.
 
-The study integrates **speech-derived acoustic features (MFCCs, jitter, shimmer, entropy)** with **ECG signal features (R-peaks, HRV, morphology)** and leverages **diffusion probabilistic models (DPMs)** for generative modeling and multimodal feature learning.
 
 ---
 
-## Objectives
-1. Develop a **speech-to-ECG mapping framework** using deep generative models.
-2. Evaluate the **diagnostic performance** of diffusion-based models against classical ML baselines (SVM, Random Forest, MLP).
-3. Validate the system’s ability to detect **multiple cardiac conditions** (heart failure, arrhythmia, atrial fibrillation).
+
 
 ---
 
 ## Repository Structure
 ```
 
-Speech-Driven-Cardiac-Morbidity-Detection/
-│
-├── data/
-│   ├── ECG_features_clean.csv
-│   ├── final_speech_features.csv
-│   ├── processed_speech_features.csv
-│
-├── notebooks/
-│   └── analysis_notebook.ipynb     # Complete Jupyter Notebook with results & plots
-│
-├── scripts/
-│   └── analysis_script.py          # Python version of notebook for automation
-│
-├── results/
-│   ├── figures/                    # Generated ECG, ROC, and feature correlation plots
-│   └── metrics/                    # Accuracy, AUC, and model comparison tables
-│
-├── README.md
-└── requirements.txt
+
 
 ````
 
 ---
 
-## Data
-The analysis uses:
-- **MIT-BIH Arrhythmia Database (ECG)** from PhysioNet
-- **Mozilla Common Voice Dataset (Speech)** for acoustic features
-- An **author-provided paired dataset** aligning speech and ECG samples
-
-Each dataset is preprocessed for noise removal, normalization, and alignment.  
-Feature extraction uses `librosa`, `neurokit2`, and `praat-parselmouth`.
-
----
-
-## Methodology
-### **1. Preprocessing**
-- Speech: Noise filtering, silence removal, MFCC, jitter, shimmer, entropy extraction.
-- ECG: Band-pass filtering, R-peak detection, HRV and QRS morphology computation.
-- Features standardized and aligned temporally.
-
-### **2. Modeling**
-- Classical ML baselines: SVM (RBF), Random Forest, MLP.
-- Generative Model: **Diffusion Probabilistic Model (DPM)** for ECG reconstruction from speech embeddings.
-
-### **3. Evaluation**
-Metrics include:
-- **Accuracy**, **Sensitivity**, **Specificity**, **AUC**, **SSIM**  
-- ROC and waveform similarity plots are generated per model.
-
----
-
-## How to Run
-
-### **1. Clone the repository**
-```bash
-git clone https://github.com/<yourusername>/Speech-Driven-Cardiac-Morbidity-Detection.git
-cd Speech-Driven-Cardiac-Morbidity-Detection
-````
-
-### **2. Install dependencies**
-
-```bash
-pip install -r requirements.txt
-```
-
-### **3. Run the Jupyter Notebook**
-
-```bash
-jupyter notebook notebooks/analysis_notebook.ipynb
-```
-
-### **4. Or execute the Python script**
-
-```bash
-python scripts/analysis_script.py
-```
-
----
-
-## Dependencies
-
-List of core libraries:
-
-```
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
-librosa
-neurokit2
-praat-parselmouth
-torch
-diffusers
-```
-
----
-
-## Results Summary
-
-* Diffusion-based models outperform SVM and MLP in AUC and waveform reconstruction fidelity.
-* Demonstrates significant correlation between **speech biomarkers** and **cardiac electrophysiological signals**.
-* Highlights diffusion models as stable, physiologically interpretable frameworks for multimodal biomedical AI.
 
 ---
 
@@ -154,6 +122,3 @@ Supervisor: **Dr. Akhtar Jamil**
 
 This project is released under the MIT License.
 
----
-
-Would you like me to also generate a `requirements.txt` file (exact Python packages and versions) based on your analysis environment? This will make your repo directly runnable by others.
